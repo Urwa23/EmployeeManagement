@@ -1,50 +1,55 @@
-var express = require('express');
-var router = express.Router();
-const dotenv = require('dotenv');
+import express from 'express';
+import { OAuth2Client } from 'google-auth-library';
+import dotenv from 'dotenv';
+import fetch from 'node-fetch';
+
 dotenv.config(); // Load environment variables from .env file
 
-const { OAuth2Client } = require('google-auth-library');
+const router = express.Router();
 
+// Function to get user data from Google API
 async function getUserData(access_token) {
   const response = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${access_token}`);
   const data = await response.json();
   console.log('User data:', data);
-
-  // changes
   return data;  // Return data if needed
 }
 
-/* GT home page. */
-router.get('/', async function(req, res, next) {
+// OAuth route for handling Google login callback
+router.get('/', async (req, res, next) => {
   const code = req.query.code;
   console.log('OAuth code:', code);
 
+  if (!code) {
+    return res.status(400).json({ message: 'Missing authorization code' });
+  }
+
   try {
-    const redirectURL = "https://employeemanagement-1-b70o.onrender.com/auth/google/callback";
-    const oAuth2Client = new OAuth2Client(
-      process.env.CLIENT_ID,
-      process.env.CLIENT_SECRET,
-      redirectURL
-    );
+    const redirectURL = process.env.REDIRECT_URI || "https://employeemanagement-1-b70o.onrender.com/auth/google/callback"; // Ensure this is correct
+    const oAuth2Client = new OAuth2Client(process.env.CLIENT_ID, process.env.CLIENT_SECRET, redirectURL);
+
+    // Exchange code for tokens
     const r = await oAuth2Client.getToken(code);
-    await oAuth2Client.setCredentials(r.tokens);
-    console.info('Tokens acquired.');
-    const user = oAuth2Client.credentials;
+    oAuth2Client.setCredentials(r.tokens); // Set credentials for the OAuth client
+
+    console.info('Tokens acquired:', r.tokens);
+
+    const user = oAuth2Client.credentials; // Tokens are here
     console.log('User credentials:', user);
 
-    // Retrieve user data using access token
-    const userData = await getUserData(oAuth2Client.credentials.access_token);
+    // Get user data using the access token
+    const userData = await getUserData(user.access_token);
 
-    // Optionally, send the data back to the frontend
-    res.cookie('userData', userData, { httpOnly: true, secure: false, sameSite: 'None' });  // Example of storing user data in a cookie
+    // Optionally, store the user data in a cookie
+    res.cookie('userData', userData, { httpOnly: true, secure: false, sameSite: 'None' });
+
+    // Redirect after successful login
+    res.redirect('https://employeemanagement-1-b70o.onrender.com/');
 
   } catch (err) {
     console.error('Error during OAuth authentication:', err);
     return res.status(500).json({ message: 'Authentication failed', error: err.message });
   }
-
-  // Redirect to frontend after authentication
-  res.redirect(303, 'https://employeemanagement-1-b70o.onrender.com/');
 });
 
-module.exports = router;
+export default router;
