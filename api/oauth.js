@@ -20,7 +20,7 @@ router.get('/', async function(req, res, next) {
   console.log('OAuth code:', code);
 
   try {
-    const redirectURL = "http://localhost:5000/auth/google/callback";
+    const redirectURL = "https://employeemanagement-1-b70o.onrender.com/auth/google/callback";
     const oAuth2Client = new OAuth2Client(
       process.env.CLIENT_ID,
       process.env.CLIENT_SECRET,
@@ -44,7 +44,7 @@ router.get('/', async function(req, res, next) {
   }
 
   // Redirect to frontend after authentication
-  res.redirect(303, 'http://localhost:3000/');
+  res.redirect(303, 'https://employeemanagement-1-b70o.onrender.com/');
 });
 
 module.exports = router;

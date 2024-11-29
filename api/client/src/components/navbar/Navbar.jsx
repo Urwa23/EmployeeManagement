@@ -19,7 +19,7 @@ function Navbar() {
     const userId = currentUser?.user?.id;
 
     // Send a POST request to logout and pass the userId
-    await fetch('http://localhost:5000/auth/logout', {
+    await fetch('https://employeemanagement-1-b70o.onrender.com/auth/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', // Ensure content-type is application/json

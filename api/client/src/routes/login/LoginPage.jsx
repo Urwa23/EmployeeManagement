@@ -11,7 +11,7 @@ const LoginPage = () => {
       const googleToken = response.credential; // Get the Google token from the response
   
       // Send the Google token to the backend
-      const res = await fetch('http://localhost:5000/auth/google/callback', {
+      const res = await fetch('https://employeemanagement-1-b70o.onrender.com/auth/google/callback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const LoginPage = () => {
       const googleToken = response.credential; // Get the Google token from the response
   
       // Send the Google token to the backend
-      const res = await fetch('http://localhost:5000/auth/google/callbackManager', {
+      const res = await fetch('https://employeemanagement-1-b70o.onrender.com/auth/google/callbackManager', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
