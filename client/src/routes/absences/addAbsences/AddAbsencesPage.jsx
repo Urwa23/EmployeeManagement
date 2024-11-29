@@ -63,6 +63,8 @@ function AddAbsencesPage() {
     } catch (err) {
       setError(err.response?.data?.message || 'Error creating absence request.');
       console.error('Error:', err);
+
+      // nw changes
     }
   };
 
