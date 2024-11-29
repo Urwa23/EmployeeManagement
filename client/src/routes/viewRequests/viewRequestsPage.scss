@@ -1,0 +1,47 @@
+/* General button styles */
+button {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  
+    &:disabled {
+      cursor: not-allowed;
+      background-color: #d3d3d3; /* Gray out disabled buttons */
+    }
+  
+    &:active {
+      transform: scale(0.98); /* Slight scale effect on button click */
+    }
+  }
+  
+  /* Accept button (green) */
+  button.accept {
+    background-color: #28a745; /* Green */
+    color: white;
+    
+    &:hover {
+      background-color: #218838; /* Darker green on hover */
+    }
+  
+    &:active {
+      background-color: #1e7e34; /* Even darker green on active */
+    }
+  }
+  
+  /* Reject button (red) */
+  button.reject {
+    background-color: #dc3545; /* Red */
+    color: white;
+  
+    &:hover {
+      background-color: #c82333; /* Darker red on hover */
+    }
+  
+    &:active {
+      background-color: #bd2130; /* Even darker red on active */
+    }
+  }
+  

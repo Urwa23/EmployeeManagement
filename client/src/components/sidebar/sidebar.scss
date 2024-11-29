@@ -1,0 +1,44 @@
+.sidebar-x {
+    border-right: 2px solid black;
+    // border-left: 2px solid beige;
+    // width: 50%;
+    padding-left: 4%;
+    height: 100vh;
+    // background-color: palegoldenrod;
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+  
+      li {
+        margin-bottom: 10px;
+  
+        &.heading {
+          font-weight: bold;
+          font-size: 16px;
+          margin-top: 20px; // Add spacing above headings
+          color: #000; // Text color for headings
+        }
+  
+        &.nav-item {
+          a {
+            text-decoration: none;
+            // color: purple; // Link color
+            color:black;
+            padding-left: 3%;
+            display: flex;
+            align-items: center;
+  
+            span {
+              margin-left: 10px;
+            }
+  
+            &:hover {
+              color: darkpurple;
+            }
+          }
+        }
+      }
+    }
+  }
+  

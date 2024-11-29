@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String             @id @default(auto()) @map("_id") @db.ObjectId
+  email              String             @unique
+  name               String
+  role               Role               @default(USER)
+ 
+  managerId          String?            @db.ObjectId
+  subordinates       String[]             
+  vacationRequests   VacationRequest[]  @relation("RequesterRelation")
+
+  absenceRequests    AbsenceRequest[]   @relation("RequesterAbsenceRelation")
+ 
+  workingTimes    WorkingTime[]  @relation("UserWorkingTime")  // Added relation field
+}
+
+model VacationRequest {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  requester   User     @relation("RequesterRelation", fields: [requesterId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  requesterId String   @db.ObjectId
+  
+  status      Status   @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  from        DateTime // The start date of the vacation
+  to          DateTime // The end date of the vacation
+  comments    String?
+  reason      String   @default("Vacation") // Default value for reason
+}
+
+
+model AbsenceRequest {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  requester   User     @relation("RequesterAbsenceRelation", fields: [requesterId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  requesterId String   @db.ObjectId
+  substitute  String
+  reason      String
+  status      Status   @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  from        DateTime // The start date of the vacation
+  to          DateTime // The end date of the vacation
+  comments    String?
+}
+
+model WorkingTime {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  requesterId String   @db.ObjectId
+  startTime   String   
+  endTime     String?  
+  pause       String? 
+  status      Status   @default(PENDING)
+
+  user        User     @relation("UserWorkingTime", fields: [requesterId], references: [id])  // This is the inverse relation
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  date        DateTime
+  reason      String   @default("TimeReuest") // Default value for reason
+}
+enum Role {
+  USER
+  MANAGER
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
+}

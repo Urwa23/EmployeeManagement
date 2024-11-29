@@ -1,0 +1,33 @@
+form {
+    display: grid;
+    grid-template-columns: 150px 1fr; // Fixed width for labels, flexible width for inputs
+    row-gap: 15px; // Space between rows
+    column-gap: 10px; // Space between columns
+    max-width: 600px; // Center the form width
+    // margin: 0 auto;
+  
+    .form-group {
+      display: contents; // Allow grid layout to control alignment
+  
+      label {
+        font-weight: bold;
+        text-align: right; // Align labels to the right
+        padding-right: 10px; // Add space between label and input
+      }
+  
+      input,
+      textarea,
+      select {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 8px;
+        font-size: 14px;
+        width: 100%; // Ensure inputs take full width of the grid column
+      }
+  
+      textarea {
+        resize: vertical; // Allow resizing only vertically
+      }
+    }
+  }
+  

@@ -1,0 +1,45 @@
+@import "../../responsive.scss";
+
+nav {
+  height: 3rem;
+  display: flex;
+  // display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  align-items: center;
+  background-color: 	#0096FF;
+  .first-container{
+    width: 20%;
+    .title{
+      color:white;
+      font-weight: 700;
+    }
+  }
+  .second-container{
+    // height: 100%;
+    // border: 1px solid brown;
+    width: 80%;
+    // border: 1px solid saddlebrown;
+    // display: flex;
+    // align-items: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    // height: 100%;
+    .working_timer{
+      background-color: rgb(98, 244, 98);
+      // height: 100%;
+    }
+    .pause_timer{
+      background-color: yellow;
+      // height: 100%;
+    }
+    input{
+      width: 200px;
+    }
+  }
+
+}
+  

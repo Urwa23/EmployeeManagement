@@ -1,0 +1,27 @@
+@import "../../responsive.scss";
+.main-container{
+    display: flex;
+    flex-direction: column;
+    .sub-container-two{
+        display: flex;
+        flex-direction: row;
+        // background-color: teal;
+        height: 100vh;
+
+        .outlet{
+            width: 80%;
+            padding-left: 2%;
+            // border: 10px solid pink;
+        }
+        .sidebar{
+            width: 15%;
+            height: 100%;
+        }
+    }
+    .sub-container-one{
+        // border:2px solid green;
+        height: 20%;
+
+    }
+   
+}
