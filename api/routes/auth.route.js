@@ -11,3 +11,6 @@ router.post('/auth/logout', logout);
 // router.post('/auth/logout', getEmployeesWithoutManager);
 
 export default router;
+
+// made changes
+
