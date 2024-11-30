@@ -5,29 +5,23 @@ import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 const LoginPage = () => {
   const { login } = useAuth();
 
-  // Success callback function
+  // Simulate the login success by setting mock token and user data
   const handleLoginSuccess = async (response) => {
     try {
-      const googleToken = response.credential; // Get the Google token from the response
-  
-      // Send the Google token to the backend
-      const res = await fetch('https://employeemanagement-2.onrender.com/auth/google/callback', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token: googleToken }), 
-        
-      });
-  
-      if (!res.ok) {
-        console.log(res)
-        throw new Error('Authentication failed');
-      }
-      
-      const data = await res.json(); // Assume the response contains JWT token and user data
-      login({ token: data.token, user: data.user });
-      console.log("token: ",data.token)
+      // Mock user data
+      const mockUserData = {
+        id: "mockUserId",
+        name: "Mock User",
+        email: "mockuser@example.com",
+        picture: "https://example.com/mockuser.jpg"
+      };
+
+      const mockToken = "mockAccessToken"; // Mock access token
+
+      // Simulate login by setting mock data in context (bypassing backend call)
+      login({ token: mockToken, user: mockUserData });
+
+      console.log("Simulated token: ", mockToken);
       window.location.href = '/';  // Redirect to the homepage or dashboard
     } catch (error) {
       console.error('Login failed:', error);
@@ -37,28 +31,22 @@ const LoginPage = () => {
 
   const handleLoginSuccessAsManager = async (response) => {
     try {
-      const googleToken = response.credential; // Get the Google token from the response
-  
-      // Send the Google token to the backend
-      const res = await fetch('https://employeemanagement-2.onrender.com/auth/google/callbackManager', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token: googleToken }),  
-      });
-  
-      if (!res.ok) {
-        throw new Error('Authentication failed');
-      }
-      // console.log("token: ",data.token)
-      const data = await res.json(); // Assume the response contains JWT token and user data
-      login({ token: data.token, user: data.user });
-      console.log("token: ",data.token)
-      window.location.href = '/'; 
-      console.log("token: ",data.token)
-       // Redirect to the homepage or dashboard
-       // Redirect to the homepage or dashboard
+      // Mock manager user data
+      const mockManagerData = {
+        id: "mockManagerId",
+        name: "Mock Manager",
+        email: "mockmanager@example.com",
+        role: "Manager",
+        picture: "https://example.com/mockmanager.jpg"
+      };
+
+      const mockToken = "mockManagerAccessToken"; // Mock access token for manager
+
+      // Simulate login for manager by setting mock data in context (bypassing backend call)
+      login({ token: mockToken, user: mockManagerData });
+
+      console.log("Simulated manager token: ", mockToken);
+      window.location.href = '/';  // Redirect to the homepage or dashboard
     } catch (error) {
       console.error('Login failed:', error);
       alert('Login failed. Please try again.');
@@ -76,15 +64,11 @@ const LoginPage = () => {
         <h1>Login</h1>
         <h1>as User</h1>
         <GoogleLogin 
-        
           onSuccess={handleLoginSuccess} 
           onError={handleLoginFailure} // Now this will work because it's defined
         />
-        <h2>
-          As Manager
-        </h2>
+        <h2>As Manager</h2>
         <GoogleLogin 
-        
           onSuccess={handleLoginSuccessAsManager} 
           onError={handleLoginFailure} // Now this will work because it's defined
         />
