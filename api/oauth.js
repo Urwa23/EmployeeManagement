@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
   }
 
   try {
-    const redirectURL = process.env.REDIRECT_URI || "https://employeemanagement-1-b70o.onrender.com/auth/google/callback"; // Ensure this is correct
+    const redirectURL = process.env.REDIRECT_URI || "https://employeemanagement-2.onrender.com/auth/google/callback"; // Ensure this is correct
     const oAuth2Client = new OAuth2Client(process.env.CLIENT_ID, process.env.CLIENT_SECRET, redirectURL);
 
     // Exchange code for tokens
@@ -44,7 +44,7 @@ router.get('/', async (req, res, next) => {
     res.cookie('userData', userData, { httpOnly: true, secure: false, sameSite: 'None' });
 
     // Redirect after successful login
-    res.redirect('https://employeemanagement-1-b70o.onrender.com/');
+    res.redirect('https://employeemanagement-2.onrender.com/');
 
   } catch (err) {
     console.error('Error during OAuth authentication:', err);

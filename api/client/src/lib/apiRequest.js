@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create an Axios instance with default configurations
 const apiRequest = axios.create({
-  baseURL: "https://employeemanagement-1-b70o.onrender.com/api", // Your backend API URL
+  baseURL: "https://employeemanagement-2.onrender.com/api", // Your backend API URL
   withCredentials: true, // Include credentials (cookies) in requests
 });
 

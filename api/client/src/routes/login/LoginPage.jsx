@@ -11,15 +11,17 @@ const LoginPage = () => {
       const googleToken = response.credential; // Get the Google token from the response
   
       // Send the Google token to the backend
-      const res = await fetch('https://employeemanagement-1-b70o.onrender.com/auth/google/callback', {
+      const res = await fetch('https://employeemanagement-2.onrender.com/auth/google/callback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ token: googleToken }),  
+        body: JSON.stringify({ token: googleToken }), 
+        
       });
   
       if (!res.ok) {
+        console.log(res)
         throw new Error('Authentication failed');
       }
       
@@ -38,7 +40,7 @@ const LoginPage = () => {
       const googleToken = response.credential; // Get the Google token from the response
   
       // Send the Google token to the backend
-      const res = await fetch('https://employeemanagement-1-b70o.onrender.com/auth/google/callbackManager', {
+      const res = await fetch('https://employeemanagement-2.onrender.com/auth/google/callbackManager', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
