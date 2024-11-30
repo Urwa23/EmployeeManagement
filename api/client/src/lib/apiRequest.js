@@ -9,8 +9,9 @@ const apiRequest = axios.create({
 // Add a request interceptor to manually set the token into cookies from localStorage
 apiRequest.interceptors.request.use(
   (config) => {
-    // Retrieve the token from localStorage (where you saved it)
-    const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).token : null;
+    // Retrieve the token from localStorage (where you saved it) or use the mock token
+    const mockToken = "mockAccessToken"; // Use mock token for demo purposes
+    const token = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).token : mockToken;
 
     // If the token exists, set it in the cookie manually
     if (token) {
