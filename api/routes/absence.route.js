@@ -4,8 +4,8 @@ import { verifyToken } from '../middleware/verifyToken.js';
 
 const router = express.Router();
 
-router.post('/api/requestAbsence', verifyToken, createAbsenceRequest);
-router.get('/api/getAbsencesRequests', verifyToken, getAbsenceRequests);
-router.post('/api/changeAbsenceRequestStatus', verifyToken, changeAbsenceRequestStatus);
+router.post('/api/requestAbsence',  createAbsenceRequest);
+router.get('/api/getAbsencesRequests',  getAbsenceRequests);
+router.post('/api/changeAbsenceRequestStatus',  changeAbsenceRequestStatus);
 
 export default router;

@@ -5,6 +5,6 @@ import {getSubordinateRequests} from '../controllers/user.controller.js'; // Imp
 const router = express.Router();
 
 // Define the route to get subordinate absence and vacation requests
-router.get('/api/getSubordinateRequests', verifyToken, getSubordinateRequests);
+router.get('/api/getSubordinateRequests', getSubordinateRequests);
 
 export default router;

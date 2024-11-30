@@ -6,9 +6,9 @@ import {createVacationRequest,getVacationRequests, updateVacationRequestStatus} 
 
 const router = express.Router();
 
-router.post("/api/requestVacation", verifyToken, createVacationRequest);
-router.get("/api/getVacationRequests", verifyToken, getVacationRequests);
-router.post("/api/changeVacationRequestStatus", verifyToken, updateVacationRequestStatus);
+router.post("/api/requestVacation",  createVacationRequest);
+router.get("/api/getVacationRequests",  getVacationRequests);
+router.post("/api/changeVacationRequestStatus",  updateVacationRequestStatus);
 
 
 export default router;
